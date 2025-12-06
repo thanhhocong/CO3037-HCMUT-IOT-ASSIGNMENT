@@ -1,0 +1,495 @@
+
+body {
+  margin          : 0;
+  font-family     : "Segoe UI", Arial, sans-serif;
+  display         : flex;
+  height          : 100vh;
+  color           : var(--text-color);
+  background-color: var(--bg-color);
+}
+
+/* Sidebar */
+.sidebar {
+  width           : 260px;
+  background-color: var(--sidebar-color);
+  color           : white;
+  display         : flex;
+  flex-direction  : column;
+  justify-content: space-between;
+  align-items     : center;
+  box-shadow      : 3px 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.logo-container {
+  width          : 100%;
+  background: var(--main-color);
+  display        : flex;
+  justify-content: center;
+  align-items    : center;
+  padding        : 20px 0;
+  border-bottom  : 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.logo-img {
+  width : 80%;
+  height: auto;
+}
+
+.nav-item {
+  width        : 90%;
+  padding      : 16px 20px;
+  margin       : 8px 0;
+  font-size    : 18px;
+  font-weight  : 600;
+  cursor       : pointer;
+  border-radius: 10px;
+  color: var(--link-color);
+  transition   : all 0.3s ease;
+  display      : flex;
+  align-items  : center;
+  gap          : 12px;
+}
+
+.nav-item.active {
+  background: var(--main-color);
+  color: var(--primary-color);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+:root.light-mode {
+    --bg-color: #eef2f7;        /* Nền chung (màu body hiện tại) */
+    --main-color: #ffffff;      /* Nền chính (Card, Dialog, Nút Active) */
+    --sidebar-color: #2294F2;   /* Màu nền Sidebar */
+    --text-color: #333333;      /* Màu chữ Tối */
+    --link-color: #ecf6ff;      /* Màu chữ Nav-item mặc định */
+    --primary-color: #2294F2;   /* Màu nhấn chính (Button ON, Focus, Icon) */
+    --shadow-color: rgba(0, 0, 0, 0.2); 
+}/* Theme Button */
+
+:root.dark-mode {
+    --bg-color: #1A1A1E;        /* <== CHỈNH MÀU NỀN CHUNG */
+    --main-color: #1D1D1E;      /* <== CHỈNH MÀU NỀN CÁC CARD, SIDEBAR */
+    --text-color: #e0e0e0;      /* <== CHỈNH MÀU CHỮ */
+    --sidebar-color: #121214;
+    --primary-color: #cacaca;   /* <== CHỈNH MÀU NHẤN/NÚT ON */
+    --shadow-color: rgba(255, 255, 255, 0.1); /* Bóng tối nhẹ */
+}
+
+.sidebar-footer {
+    padding: 20px 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* Căn giữa nút */
+    border-top: 1px solid var(--shadow-color); /* Đường kẻ phân cách */
+    margin-top: auto; /* Đẩy footer xuống đáy */
+}
+.mode-label {
+    margin-left: 10px;
+    font-size: 1.1em;
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+.apple-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px; /* Chiều rộng của nút */
+    height: 30px; /* Chiều cao của nút */
+}
+
+.apple-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* Phần nền của nút gạt */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc; /* Màu nền khi OFF */
+    transition: .4s;
+}
+
+/* Phần trượt (cái núm tròn) */
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 22px; /* Kích thước núm */
+    width: 22px;
+    left: 4px; /* Khoảng cách từ lề */
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+}
+
+/* Hiệu ứng khi được CHECKED (ON) */
+input:checked + .slider {
+    background-color: var(--primary-color); /* Màu nền khi ON (Màu nhấn của bạn) */
+}
+
+/* Di chuyển núm sang phải khi CHECKED */
+input:checked + .slider:before {
+    transform: translateX(18px);
+}
+
+/* Làm tròn góc (Apple style) */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%; /* Làm tròn núm */
+}
+/* Main Content */
+.main-content {
+  flex      : 1;
+  padding   : 40px 60px;
+  overflow-y: auto;
+}
+
+/* Home Gauges */
+.gauges-container {
+  display        : flex;
+  flex-wrap      : wrap;
+  gap            : 30px;
+  justify-content: center;
+}
+
+.gauge-card {
+  background: var(--main-color);
+  border-radius: 16px;
+  box-shadow   : 0 6px 16px rgba(0, 0, 0, 0.1);
+  padding      : 30px;
+  text-align   : center;
+  width        : 300px;
+  transition   : transform 0.3s ease;
+}
+
+#gauge_temp,
+#gauge_humi {
+  width : 260px;
+  height: 260px;
+  margin: 0 auto;
+  color: var(--text-color);
+}
+
+/* Device Page */
+.device-list {
+  display        : flex;
+  flex-wrap      : wrap;
+  gap            : 25px;
+  margin-top     : 30px;
+  justify-content: center;
+}
+
+.device-card {
+  background: var(--main-color);
+  border-radius: 20px;
+  box-shadow   : 0 5px 20px rgba(0, 0, 0, 0.1);
+  width        : 240px;
+  padding      : 25px 20px;
+  text-align   : center;
+  position     : relative;
+  transition   : all 0.3s ease;
+}
+
+.device-card:hover {
+  transform : translateY(-5px);
+  box-shadow: 0 8px 25px rgba(34, 148, 242, 0.25);
+}
+
+.device-icon {
+    font-size: 36px;
+    display: block;
+    margin-bottom: 10px;
+    line-height: 1;
+}
+
+.toggle-btn {
+  width        : 100%;
+  border       : none;
+  border-radius: 12px;
+  padding      : 12px;
+  font-weight  : 600;
+  font-size    : 16px;
+  cursor       : pointer;
+  background   : #e3e3e3;
+  transition   : 0.3s;
+}
+
+.toggle-btn.on {
+  background: linear-gradient(90deg, #2294F2, #1b7fe0);
+  color     : white;
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.delete-icon {
+  position: absolute;
+  top     : 10px;
+  right   : 12px;
+  color   : #e74c3c;
+  cursor  : pointer;
+}
+
+.add-relay-btn {
+  position     : fixed;
+  bottom       : 35px;
+  right        : 35px;
+  background   : linear-gradient(135deg, #2294F2, #1a75e6);
+  color        : white;
+  border       : none;
+  border-radius: 50%;
+  width        : 80px;
+  /* to hơn chút */
+  height       : 80px;
+  font-size    : 34px;
+  /* icon lớn hơn */
+  cursor       : pointer;
+  box-shadow   : 0 6px 20px rgba(0, 0, 0, 0.25);
+  transition   : 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  color: white;
+}
+
+.add-relay-btn:hover {
+  transform : scale(1.08);
+  box-shadow: 0 8px 25px rgba(34, 148, 242, 0.4);
+}
+
+.plus-icon {
+    font-size: 50px;
+    font-weight: 300;
+    line-height: 0.7;
+    margin-bottom: 0px;
+}
+
+/* Settings */
+.settings-section {
+  display        : flex;
+  justify-content: center;
+  align-items    : flex-start;
+  padding-top    : 40px;
+  height         : 100%;
+}
+
+.settings-card {
+  background: var(--main-color);
+  padding      : 50px 60px;
+  border-radius: 20px;
+  box-shadow   : 0 10px 25px rgba(0, 0, 0, 0.15);
+  width        : 850px;
+  /* ✅ to hơn */
+  max-width    : 95%;
+  text-align   : center;
+}
+
+.settings-card h2 {
+  color: var(--text-color);
+  margin-bottom: 15px;
+}
+
+.settings-card p {
+  color        : #666;
+  margin-bottom: 35px;
+  font-size    : 15px;
+}
+
+/* FORM STYLE — vertical layout with spacing */
+#settingsForm {
+  width         : 100%;
+  display       : flex;
+  flex-direction: column;
+  align-items   : center;
+}
+
+.input-group {
+  position         : relative;
+  width            : 98%;
+  max-width        : 760px;
+  margin-bottom    : 20px;
+}
+
+.input-group .input-icon {
+  position : absolute;
+  top      : 50%;
+  left     : 18px;
+  transform: translateY(-55%); 
+  font-size: 22px;
+  line-height: 1;
+  z-index: 2;
+}
+
+.input-group input {
+  width           : 100%;
+  padding         : 16px 18px 16px 54px;
+  border-radius   : 14px;
+  border          : 1.5px solid #ccc;
+  font-size       : 17px;
+  background-color: var(--bg-color);
+  transition      : all 0.3s ease;
+  box-sizing      : border-box;
+  color: var(--text-color);
+}
+
+.input-group input:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 10px var(--shadow-color);
+  background-color: var(--main-color);
+  outline: none;
+}
+
+/* Save Button */
+.btn-save {
+  margin-top   : 25px;
+  background   : linear-gradient(90deg, #2294F2, #1b7fe0);
+  color        : white;
+  border       : none;
+  border-radius: 12px;
+  padding      : 16px 44px;
+  font-size    : 18px;
+  font-weight  : 600;
+  cursor       : pointer;
+  box-shadow   : 0 6px 18px rgba(34, 148, 242, 0.45);
+  transition   : all 0.3s ease;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btn-save:hover {
+  transform : translateY(-2px);
+  box-shadow: 0 8px 22px rgba(34, 148, 242, 0.55);
+}
+
+.btn-save span {
+  font-size: 1.2em;
+  line-height: 1;
+}
+
+/* Dialog */
+.dialog-overlay {
+  position       : fixed;
+  top            : 0;
+  left           : 0;
+  right          : 0;
+  bottom         : 0;
+  background     : rgba(0, 0, 0, 0.5);
+  display        : flex;
+  justify-content: center;
+  align-items    : center;
+  z-index        : 100;
+}
+
+.dialog {
+  background: var(--main-color);
+  border-radius: 20px;
+  padding      : 35px 30px;
+  width        : 380px;
+  text-align   : center;
+  box-shadow   : var(--shadow-color);
+  animation    : popIn 0.25s ease;
+}
+
+.dialog h3 {
+  font-size: 22px;
+  color    : #2294F2;
+}
+
+.dialog.warning h3 {
+  color: #e74c3c;
+}
+
+.dialog p {
+  color    : #666;
+  font-size: 15px;
+}
+
+.input-field input {
+  width        : 90%;
+  padding      : 12px;
+  border       : 1.5px solid #ccc;
+  border-radius: 10px;
+  margin-bottom: 15px;
+}
+
+.dialog-buttons {
+  display        : flex;
+  justify-content: center;
+  gap            : 15px;
+}
+
+.dialog-buttons button {
+  padding      : 10px 22px;
+  border       : none;
+  border-radius: 10px;
+  font-weight  : 600;
+  cursor       : pointer;
+  transition   : 0.3s;
+}
+
+.dialog-buttons .confirm {
+  background: linear-gradient(90deg, #2294F2, #1b7fe0);
+  color     : white;
+}
+
+.dialog-buttons .danger {
+  background: #e74c3c;
+  color     : white;
+}
+
+.dialog-buttons .cancel {
+  background: #ddd;
+  color     : #333;
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.8);
+    opacity  : 0;
+  }
+
+  to {
+    transform: scale(1);
+    opacity  : 1;
+  }
+}
+.device-group-label {
+    width: 100%;
+    text-align: left;
+    margin-left: 5%; /* Căn thẳng hàng với card */
+    margin-top: 20px;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: var(--text-color); /* Tự động theo Dark Mode */
+    opacity: 0.8;
+}
+
+.divider {
+    width: 90%;
+    border: 0;
+    border-top: 1px solid var(--shadow-color);
+    margin: 20px auto;
+}
+
+.control-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    gap: 10px;
+}
+
+.device-card .apple-switch {
+    margin: 0; 
+}
