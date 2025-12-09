@@ -13,9 +13,9 @@
 // Above 60%: HUMID (BLUE)
 
 // Color definitions (RGB values)
-#define COLOR_DRY_R 59         // RED for dry
-#define COLOR_DRY_G 59
-#define COLOR_DRY_B 59
+#define COLOR_DRY_R 255         // RED for dry
+#define COLOR_DRY_G 0
+#define COLOR_DRY_B 0
 
 #define COLOR_COMFORTABLE_R 0    // GREEN for comfortable
 #define COLOR_COMFORTABLE_G 255
